@@ -11,7 +11,6 @@ class Overview extends Component {
       <div>
         <h1>Tasks</h1>
         <ul>
-          {console.log(this.props.tasks)}
           {this.props.tasks.map((element, index) => {
             return <li key={index}>{element}</li>
           })}

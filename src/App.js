@@ -9,35 +9,32 @@ class App extends Component {
 
     
     this.state = {
-      currentInput: [],
+      currentInput: '',
+      tasksList: [],
     }
     
     this.onInputChange = this.onInputChange.bind(this)
     this.onClickBtn = this.onClickBtn.bind(this)
   }
 
-  onInputChange() {
-
+  onInputChange(event) {
+    this.setState({
+      currentInput: event.target.value
+    })
   }
 
   onClickBtn() {
-    console.log('Button has been clicked!')
-    let someInput = document.querySelector('#task-input')
-    console.log(someInput.value)
-
-    // this.setState({ myArray: [...this.state.myArray, 'new value'] }) //simple value
-
     this.setState({
-      currentInput: [...this.state.currentInput, someInput.value]
+      tasksList: [...this.state.tasksList, this.state.currentInput]
     })
   }
 
   render() {
     return (
       <div>
-        <input onChange={this.onInputChange} type="text" id="task-input" />
+        <input onChange={event => this.onInputChange(event)} type="text" id="task-input" />
         <button onClick={this.onClickBtn}>Submit</button>
-        <Overview tasks={this.state.currentInput} />
+        <Overview tasks={this.state.tasksList} />
       </div>
     )
   }
