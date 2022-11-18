@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+// handle input field with logic
+import React, { Component } from 'react';
+import Overview from './components/Overview'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+  constructor(props) {
+    super(props)
+
+    
+    this.state = {
+      currentInput: [],
+    }
+    
+    this.onInputChange = this.onInputChange.bind(this)
+    this.onClickBtn = this.onClickBtn.bind(this)
+  }
+
+  onInputChange() {
+
+  }
+
+  onClickBtn() {
+    console.log('Button has been clicked!')
+    let someInput = document.querySelector('#task-input')
+    console.log(someInput.value)
+
+    // this.setState({ myArray: [...this.state.myArray, 'new value'] }) //simple value
+
+    this.setState({
+      currentInput: [...this.state.currentInput, someInput.value]
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <input onChange={this.onInputChange} type="text" id="task-input" />
+        <button onClick={this.onClickBtn}>Submit</button>
+        <Overview tasks={this.state.currentInput} />
+      </div>
+    )
+  }
 }
 
 export default App;
